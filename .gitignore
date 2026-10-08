@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Environments
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Data
+data/
+datasets/
+*.edf
+*.h5
+*.hdf5
+*.npy
+*.npz
+
+# Experiments
+outputs/
+checkpoints/
+runs/
+wandb/
+*.ckpt
+*.pth
+*.pt
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Credentials
+*.pem
+*.key

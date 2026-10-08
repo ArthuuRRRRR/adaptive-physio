@@ -1,0 +1,33 @@
+
+datasets:
+  shhs1:
+    raw_dir: "/datasets/sleep/#_SHHS/polysomnography/edfs/shhs1"
+    format: "edf"
+
+  shhs2:
+    raw_dir: "/datasets/sleep/#_SHHS/polysomnography/edfs/shhs2"
+    format: "edf"
+
+  mesa:
+    raw_dir: "/hdd2/kdpark/sleep_datasets/MESA_raw/polysomnography/edfs"
+    format: "edf"
+
+training:
+  dataset: "shhs1"
+  modality: "EEG"
+  window_seconds: 30
+```
+
+Puis vérifie simplement que les fichiers sont accessibles depuis ton environnement :
+
+```bash
+ls "/datasets/sleep/#_SHHS/polysomnography/edfs/shhs1/" | head -5
+
+ls "/hdd2/kdpark/sleep_datasets/MESA_raw/polysomnography/edfs/" | head -5
+```
+
+Ces commandes vérifient l'accès actuel, car les chemins proviennent de nos précédentes sessions.
+
+**Ensuite, on construira `data/edf_dataset.py`**, qui lira directement les fichiers EDF, extraira des fenêtres de 30 secondes et appliquera la normalisation nécessaire.
+
+On conservera le Gaussian smoothing dans `granularity_targets.py`, avec des paramètres adaptés à chaque modalité. Nous pourrons alors entraîner notre premier tokenizer 16 / 64 / 128 sur de vrais signaux physiologiques. <MemoryCite />
