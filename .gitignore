@@ -13,8 +13,8 @@ venv/
 !.env.example
 
 # Data
-data/
-datasets/
+/data/
+/datasets/
 *.edf
 *.h5
 *.hdf5

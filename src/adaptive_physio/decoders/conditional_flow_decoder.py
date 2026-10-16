@@ -46,7 +46,7 @@ class ConditionalFlowDecoder(nn.Module):
         hidden_dim=64,
         num_heads=4,
         max_tokens=128,
-        downsample=8,
+        downsample=5,
     ):
         super().__init__()
 
