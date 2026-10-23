@@ -41,3 +41,11 @@ wandb/
 # Credentials
 *.pem
 *.key
+third_party/SingLEM/
+
+# Physiological datasets and generated artifacts
+*.mmap
+*.pickle
+*.pkl
+*.parquet
+*.log

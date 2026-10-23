@@ -1,0 +1,108 @@
+========================================================================
+CNN-TCN SLEEP STAGING
+========================================================================
+Device: cuda
+GPU: NVIDIA GeForce RTX 3090
+Dataset: shhs1
+Input: synthesized
+train shhs1 : 5068 windows
+val   shhs1 : 503 windows
+
+Train windows: 5068
+Val windows: 503
+Trainable parameters: 1,350,820
+Train class counts: [553121, 1235927, 454911, 350857]
+Class weights: [0.9932, 0.6645, 1.0952, 1.2471]
+
+Epoch 01/20
+Train loss=0.7652 acc=0.6957
+Val   loss=0.6238 acc=0.7329 MF1=0.7496 kappa=0.6272
+  -> new best Macro-F1 checkpoint
+
+Epoch 02/20
+Train loss=0.4930 acc=0.7951
+Val   loss=0.4228 acc=0.8337 MF1=0.8304 kappa=0.7541
+  -> new best Macro-F1 checkpoint
+
+Epoch 03/20
+Train loss=0.4429 acc=0.8128
+Val   loss=0.4224 acc=0.8318 MF1=0.8264 kappa=0.7514
+
+Epoch 04/20
+Train loss=0.4066 acc=0.8273
+Val   loss=0.4078 acc=0.8351 MF1=0.8356 kappa=0.7635
+  -> new best Macro-F1 checkpoint
+
+Epoch 05/20
+Train loss=0.3858 acc=0.8363
+Val   loss=0.3612 acc=0.8547 MF1=0.8533 kappa=0.7874
+  -> new best Macro-F1 checkpoint
+
+Epoch 06/20
+Train loss=0.3733 acc=0.8408
+Val   loss=0.3685 acc=0.8511 MF1=0.8494 kappa=0.7837
+
+Epoch 07/20
+Train loss=0.3635 acc=0.8453
+Val   loss=0.3506 acc=0.8575 MF1=0.8568 kappa=0.7925
+  -> new best Macro-F1 checkpoint
+
+Epoch 08/20
+Train loss=0.3549 acc=0.8494
+Val   loss=0.3538 acc=0.8562 MF1=0.8567 kappa=0.7917
+
+Epoch 09/20
+Train loss=0.3465 acc=0.8525
+Val   loss=0.3667 acc=0.8497 MF1=0.8510 kappa=0.7833
+
+Epoch 10/20
+Train loss=0.3425 acc=0.8543
+Val   loss=0.3442 acc=0.8604 MF1=0.8591 kappa=0.7965
+  -> new best Macro-F1 checkpoint
+
+Epoch 11/20
+Train loss=0.3369 acc=0.8561
+Val   loss=0.3511 acc=0.8572 MF1=0.8591 kappa=0.7938
+
+Epoch 12/20
+Train loss=0.3328 acc=0.8576
+Val   loss=0.3475 acc=0.8579 MF1=0.8595 kappa=0.7952
+  -> new best Macro-F1 checkpoint
+
+Epoch 13/20
+Train loss=0.3279 acc=0.8598
+Val   loss=0.3379 acc=0.8632 MF1=0.8634 kappa=0.8012
+  -> new best Macro-F1 checkpoint
+
+Epoch 14/20
+Train loss=0.3258 acc=0.8606
+Val   loss=0.3474 acc=0.8585 MF1=0.8599 kappa=0.7961
+
+Epoch 15/20
+Train loss=0.3210 acc=0.8626
+Val   loss=0.3559 acc=0.8534 MF1=0.8566 kappa=0.7897
+
+Epoch 16/20
+Train loss=0.3160 acc=0.8648
+Val   loss=0.3357 acc=0.8636 MF1=0.8636 kappa=0.8024
+  -> new best Macro-F1 checkpoint
+
+Epoch 17/20
+Train loss=0.3143 acc=0.8654
+Val   loss=0.3427 acc=0.8597 MF1=0.8608 kappa=0.7977
+
+Epoch 18/20
+Train loss=0.3108 acc=0.8668
+Val   loss=0.3316 acc=0.8665 MF1=0.8661 kappa=0.8057
+  -> new best Macro-F1 checkpoint
+
+Epoch 19/20
+Train loss=0.3084 acc=0.8680
+Val   loss=0.3321 acc=0.8647 MF1=0.8649 kappa=0.8036
+
+Epoch 20/20
+Train loss=0.3077 acc=0.8681
+Val   loss=0.3363 acc=0.8629 MF1=0.8634 kappa=0.8017
+
+Best validation Macro-F1: 0.8661
+Checkpoint: /home/arthurdel/adaptive-physio/outputs/downstream/staging/retrained_cnn/V7_80/checkpoint_best_macro_f1.pt

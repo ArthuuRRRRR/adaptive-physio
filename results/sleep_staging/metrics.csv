@@ -1,0 +1,17 @@
+protocol,condition,tokens,accuracy,macro_f1,kappa
+ground_truth,original,NA,0.8780,0.8795,0.8234
+frozen,uniform16,16,0.7118,0.6148,0.5509
+frozen,uniform64,64,0.8102,0.7973,0.7168
+frozen,uniform128,128,0.8311,0.8268,0.7531
+frozen,random80,80,0.8154,0.8048,0.7254
+frozen,fixed80,80,0.8180,0.8078,0.7307
+frozen,V4_64,64,0.8104,0.7973,0.7167
+frozen,V4_80,80,0.8201,0.8112,0.7341
+frozen,V4_96,96,0.8257,0.8193,0.7438
+frozen,V5_80,80,0.8206,0.8118,0.7348
+frozen,V7_80,80,0.8205,0.8118,0.7348
+retrained,uniform64,64,0.8685,0.8698,0.8100
+retrained,uniform128,128,0.8748,0.8763,0.8188
+retrained,random80,80,0.8708,0.8724,0.8132
+retrained,fixed80,80,0.8719,0.8736,0.8148
+retrained,V7_80,80,0.8711,0.8722,0.8133
