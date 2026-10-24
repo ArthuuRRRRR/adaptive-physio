@@ -282,6 +282,7 @@ def main():
     parser.add_argument("--condition", default="V4_80")
     parser.add_argument("--norm-file")
     parser.add_argument("--microbatch", type=int, default=32)
+    parser.add_argument("--resume", action="store_true")
     parser.add_argument("--audit-windows", type=int, default=2)
     parser.add_argument("--min-corr", type=float, default=0.95)
     parser.add_argument("--max-mae", type=float, default=0.08)
@@ -368,15 +369,51 @@ def main():
     temporary = target / "synthesized_eeg.tmp"
     final = target / "synthesized_eeg.mmap"
 
-    if temporary.exists():
-        temporary.unlink()
+    # Resume interrupted V8 generation without deleting completed windows.
+    resume_from = 0
+    shape = tuple(meta["eeg_shape"])
+    dtype = np.dtype(meta["eeg_dtype"])
 
-    output = np.memmap(
-        temporary,
-        mode="w+",
-        dtype=np.dtype(meta["eeg_dtype"]),
-        shape=tuple(meta["eeg_shape"]),
-    )
+    if args.resume:
+        if args.condition != "V8_80":
+            raise ValueError("Resume is currently supported only for V8_80")
+
+        if not temporary.is_file():
+            raise FileNotFoundError(temporary)
+
+        expected_bytes = int(np.prod(shape)) * dtype.itemsize
+        if temporary.stat().st_size != expected_bytes:
+            raise RuntimeError("Temporary file size does not match metadata")
+
+        output = np.memmap(
+            temporary, mode="r+", dtype=dtype, shape=shape
+        )
+
+        bins = [10, 30, 60, 90, 130, 170, 210, 240]
+        finished = np.any(
+            output[:, bins, -1] != 0, axis=1
+        )
+
+        missing = np.flatnonzero(~finished)
+        resume_from = int(missing[0]) if len(missing) else len(mapping)
+
+        if finished[resume_from:].any():
+            raise RuntimeError(
+                "Non-contiguous completed windows: unsafe to resume"
+            )
+
+        print(
+            f"RESUMING {args.condition} {args.split}: "
+            f"{resume_from}/{len(mapping)} windows completed",
+            flush=True,
+        )
+    else:
+        if temporary.exists():
+            temporary.unlink()
+
+        output = np.memmap(
+            temporary, mode="w+", dtype=dtype, shape=shape
+        )
 
     model = PhysioTokenizerV3().cuda().eval()
     ckpt = torch.load(
@@ -397,11 +434,13 @@ def main():
         )
         agents[match.group(1)] = agent.eval()
 
-    total_tokens = 0.0
-    total_epochs = 0
+    total_tokens = float(resume_from * 512 * 80)
+    total_epochs = resume_from * 512
 
     with torch.inference_mode():
         for i, (start, sid, first_epoch) in enumerate(mapping):
+            if i < resume_from:
+                continue
             for begin in range(0, 512, args.microbatch):
                 end = min(begin + args.microbatch, 512)
 
